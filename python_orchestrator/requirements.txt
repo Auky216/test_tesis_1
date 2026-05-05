@@ -1,0 +1,4 @@
+aiomqtt==2.1.0
+aiohttp==3.9.5
+pydantic==2.7.4 # Para validación opcional
+# picamera2==0.1.2 # Asumido instalado en el entorno de la RPi

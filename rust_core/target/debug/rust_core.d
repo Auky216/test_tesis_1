@@ -1,0 +1,1 @@
+/Users/antonio/Desktop/Projects/test_tesis_1/rust_core/target/debug/rust_core: /Users/antonio/Desktop/Projects/test_tesis_1/rust_core/src/discovery.rs /Users/antonio/Desktop/Projects/test_tesis_1/rust_core/src/main.rs /Users/antonio/Desktop/Projects/test_tesis_1/rust_core/src/mqtt.rs

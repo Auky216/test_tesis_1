@@ -1,0 +1,12 @@
+[package]
+name = "rust_core"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+tokio = { version = "1.32", features = ["full"] }
+rumqttc = "0.22.0"
+mdns-sd = "0.9.3"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+# rppal = "0.14.1" # Comentado inicialmente. Solo compila en Raspberry Pi.

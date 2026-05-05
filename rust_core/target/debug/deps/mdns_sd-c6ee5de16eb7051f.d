@@ -1,0 +1,11 @@
+/Users/antonio/Desktop/Projects/test_tesis_1/rust_core/target/debug/deps/mdns_sd-c6ee5de16eb7051f.d: /Users/antonio/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/mdns-sd-0.9.3/src/lib.rs /Users/antonio/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/mdns-sd-0.9.3/src/dns_parser.rs /Users/antonio/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/mdns-sd-0.9.3/src/error.rs /Users/antonio/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/mdns-sd-0.9.3/src/service_daemon.rs /Users/antonio/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/mdns-sd-0.9.3/src/service_info.rs
+
+/Users/antonio/Desktop/Projects/test_tesis_1/rust_core/target/debug/deps/libmdns_sd-c6ee5de16eb7051f.rlib: /Users/antonio/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/mdns-sd-0.9.3/src/lib.rs /Users/antonio/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/mdns-sd-0.9.3/src/dns_parser.rs /Users/antonio/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/mdns-sd-0.9.3/src/error.rs /Users/antonio/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/mdns-sd-0.9.3/src/service_daemon.rs /Users/antonio/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/mdns-sd-0.9.3/src/service_info.rs
+
+/Users/antonio/Desktop/Projects/test_tesis_1/rust_core/target/debug/deps/libmdns_sd-c6ee5de16eb7051f.rmeta: /Users/antonio/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/mdns-sd-0.9.3/src/lib.rs /Users/antonio/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/mdns-sd-0.9.3/src/dns_parser.rs /Users/antonio/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/mdns-sd-0.9.3/src/error.rs /Users/antonio/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/mdns-sd-0.9.3/src/service_daemon.rs /Users/antonio/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/mdns-sd-0.9.3/src/service_info.rs
+
+/Users/antonio/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/mdns-sd-0.9.3/src/lib.rs:
+/Users/antonio/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/mdns-sd-0.9.3/src/dns_parser.rs:
+/Users/antonio/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/mdns-sd-0.9.3/src/error.rs:
+/Users/antonio/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/mdns-sd-0.9.3/src/service_daemon.rs:
+/Users/antonio/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/mdns-sd-0.9.3/src/service_info.rs:

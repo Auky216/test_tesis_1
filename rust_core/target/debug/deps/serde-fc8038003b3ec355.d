@@ -1,0 +1,14 @@
+/Users/antonio/Desktop/Projects/test_tesis_1/rust_core/target/debug/deps/serde-fc8038003b3ec355.d: /Users/antonio/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/lib.rs /Users/antonio/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/integer128.rs /Users/antonio/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/mod.rs /Users/antonio/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/de.rs /Users/antonio/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/ser.rs /Users/antonio/Desktop/Projects/test_tesis_1/rust_core/target/debug/build/serde-258665a108843663/out/private.rs
+
+/Users/antonio/Desktop/Projects/test_tesis_1/rust_core/target/debug/deps/libserde-fc8038003b3ec355.rlib: /Users/antonio/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/lib.rs /Users/antonio/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/integer128.rs /Users/antonio/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/mod.rs /Users/antonio/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/de.rs /Users/antonio/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/ser.rs /Users/antonio/Desktop/Projects/test_tesis_1/rust_core/target/debug/build/serde-258665a108843663/out/private.rs
+
+/Users/antonio/Desktop/Projects/test_tesis_1/rust_core/target/debug/deps/libserde-fc8038003b3ec355.rmeta: /Users/antonio/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/lib.rs /Users/antonio/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/integer128.rs /Users/antonio/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/mod.rs /Users/antonio/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/de.rs /Users/antonio/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/ser.rs /Users/antonio/Desktop/Projects/test_tesis_1/rust_core/target/debug/build/serde-258665a108843663/out/private.rs
+
+/Users/antonio/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/lib.rs:
+/Users/antonio/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/integer128.rs:
+/Users/antonio/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/mod.rs:
+/Users/antonio/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/de.rs:
+/Users/antonio/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/private/ser.rs:
+/Users/antonio/Desktop/Projects/test_tesis_1/rust_core/target/debug/build/serde-258665a108843663/out/private.rs:
+
+# env-dep:OUT_DIR=/Users/antonio/Desktop/Projects/test_tesis_1/rust_core/target/debug/build/serde-258665a108843663/out
