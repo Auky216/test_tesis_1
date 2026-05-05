@@ -1,45 +1,46 @@
 import asyncio
-from llm_client import query_ollama
 from rich.console import Console
 from rich.markdown import Markdown
 from rich.panel import Panel
 from rich.prompt import Prompt
+from agent import run_agent
+from state_manager import mqtt_listener_loop
 
 console = Console()
 
-async def main():
-    console.print(Panel.fit("[bold cyan]=== Chat Interactivo Edge AI ===[/bold cyan]\n[dim]Escribe 'salir' para terminar.[/dim]", border_style="cyan"))
+async def interactive_loop():
+    console.print(Panel.fit("[bold]=== OPENCLAW EDGE AI ===[/bold]\n[dim]Escribe 'salir' para detener la ejecución.[/dim]", border_style="white"))
     
-    # Un prompt genérico
-    system_prompt = "Eres un experto en Edge Computing, IoT y Rust. Responde en español de forma útil y clara."
-    
-    # Aquí guardaremos la memoria de la conversación
     historial = ""
     
     while True:
         try:
-            user_input = Prompt.ask("\n[bold green]Tú[/bold green]")
+            user_input = await asyncio.to_thread(Prompt.ask, "\n[bold]User[/bold]")
+            
             if user_input.lower() in ['salir', 'exit', 'quit']:
-                console.print("[dim]Saliendo...[/dim]")
+                console.print("[dim]Terminando sesión...[/dim]")
                 break
                 
             if not user_input.strip():
                 continue
                 
-            with console.status("[bold yellow]IA pensando...", spinner="dots"):
-                # Unimos el historial pasado con la pregunta nueva
-                contexto_completo = f"{historial}\nUsuario: {user_input}"
-                
-                response = await query_ollama(system_prompt, contexto_completo, max_tokens=2048, temp=0.7)
+            final_response = await run_agent(user_input, historial)
             
-            # Actualizamos el historial para la próxima vuelta
-            historial += f"\nUsuario: {user_input}\nAsistente: {response.strip()}"
+            historial += f"\nUsuario: {user_input}\nAsistente: {final_response.strip()}"
             
-            console.print(Panel(Markdown(response.strip()), title="[bold magenta]Modelo Local[/bold magenta]", border_style="magenta"))
+            console.print(Panel(Markdown(final_response.strip()), title="[bold]Agent Response[/bold]", border_style="white"))
             
         except KeyboardInterrupt:
-            console.print("\n[dim]Saliendo...[/dim]")
+            console.print("\n[dim]Interrupción de usuario. Saliendo...[/dim]")
             break
+        except Exception as e:
+            console.print(f"[reverse] ERROR CRÍTICO [/reverse] {e}")
+            break
+
+async def main():
+    listener_task = asyncio.create_task(mqtt_listener_loop())
+    await interactive_loop()
+    listener_task.cancel()
 
 if __name__ == "__main__":
     asyncio.run(main())

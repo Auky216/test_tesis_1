@@ -5,19 +5,21 @@ from rich.console import Console
 
 console = Console()
 
-async def execute_tool(tool_call: dict):
+async def execute_tool(tool_call: dict) -> str:
     tool_name = tool_call.get("tool")
     args = tool_call.get("args", [])
     
     script_path = f"../scripts/tools/{tool_name}.py"
     
     if not os.path.exists(script_path):
-        console.print(f"[bold red]❌ Tool {tool_name} no encontrada en {script_path}.[/bold red]")
-        return
+        err = f"Tool {tool_name} no encontrada en {script_path}."
+        console.print(f"[bold]  [ERROR][/bold] {err}")
+        return err
 
-    # Si estamos en macOS (darwin), bwrap no existe. Hacemos bypass para test local.
-    if sys.platform == "darwin":
-        console.print(f"[yellow][WARNING] Ejecutando '{tool_name}' de forma nativa. Sandboxing deshabilitado en macOS.[/yellow]")
+    native_tools = ["system_bash", "write_file", "read_file"]
+    # Bypass de bwrap si estamos en Mac o si explícitamente es la herramienta de control nativo
+    if sys.platform == "darwin" or tool_name in native_tools:
+        console.print(f"[dim]  (Modo Nativo) -> {tool_name}[/dim]")
         cmd = ["python3", script_path] + [str(a) for a in args]
     else:
         # Construcción de la jaula en Linux (Raspberry Pi)
@@ -40,7 +42,9 @@ async def execute_tool(tool_call: dict):
     out_str = stdout.decode().strip()
     err_str = stderr.decode().strip()
     
-    if err_str:
-        console.print(f"[bold red]❌ Error en Tool {tool_name}:[/bold red] {err_str}")
+    if err_str and not out_str:
+        console.print(f"[bold]  [ERROR][/bold] {err_str}")
+        return err_str
     else:
-        console.print(f"[bold cyan]⚡ Resultado de Acción:[/bold cyan] {out_str}")
+        # A veces stderr tiene warnings pero la ejecución fue exitosa
+        return out_str
