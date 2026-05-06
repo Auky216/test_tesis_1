@@ -19,16 +19,19 @@ async def execute_tool(tool_call: dict) -> str:
     native_tools = ["system_bash", "write_file", "read_file"]
     # Bypass de bwrap si estamos en Mac o si explícitamente es la herramienta de control nativo
     if sys.platform == "darwin" or tool_name in native_tools:
-        console.print(f"[dim]  (Modo Nativo) -> {tool_name}[/dim]")
+        console.print(f"[dim]  (Modo Nativo {sys.platform}) -> {tool_name}[/dim]")
         cmd = ["python3", script_path] + [str(a) for a in args]
     else:
-        # Construcción de la jaula en Linux (Raspberry Pi)
+        # Configuración para Linux / Raspberry Pi
+        console.print(f"[dim]  (Modo Sandbox bwrap) -> {tool_name}[/dim]")
         cmd = [
             "bwrap",
             "--ro-bind", "/", "/",
             "--dev", "/dev",
-            "--unshare-net",
+            "--proc", "/proc",
             "--tmpfs", "/tmp",
+            "--unshare-all",
+            "--share-net", # Permitir red si es necesario (ej. para Ollama si fuera externo, pero aquí es local)
             "python3", script_path
         ] + [str(a) for a in args]
     

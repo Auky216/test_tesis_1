@@ -16,6 +16,7 @@ try:
     
     with open(file_path, "w") as f:
         f.write(content)
-    print(f"Success: Archivo {file_path} escrito correctamente.")
+    abs_path = os.path.abspath(file_path)
+    print(f"Success: Archivo guardado en: {abs_path}")
 except Exception as e:
     print(f"Error escribiendo archivo: {e}")
