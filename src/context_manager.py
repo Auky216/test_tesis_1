@@ -1,11 +1,20 @@
 import chromadb
+from chromadb.utils import embedding_functions
 import time
 
 class ContextManager:
     def __init__(self, db_path: str = "./chroma_db"):
-        print("[MEMORIA] Inicializando base de datos vectorial ChromaDB...")
+        print("[MEMORIA] Inicializando base de datos vectorial ChromaDB con Ollama Embeddings...")
+        # Usamos nomic-embed-text a través de Ollama para no usar onnxruntime en la Raspberry Pi
+        self.ollama_ef = embedding_functions.OllamaEmbeddingFunction(
+            url="http://localhost:11434/api/embeddings",
+            model_name="nomic-embed-text",
+        )
         self.client = chromadb.PersistentClient(path=db_path)
-        self.collection = self.client.get_or_create_collection(name="project_context")
+        self.collection = self.client.get_or_create_collection(
+            name="project_context_ollama",
+            embedding_function=self.ollama_ef
+        )
         print(f"[MEMORIA] Lista. Documentos históricos recordados: {self.collection.count()}")
         
     def add_to_context(self, task: str, code: str):

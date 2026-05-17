@@ -3,7 +3,7 @@ import aiohttp
 import re
 
 class CodeGenerator:
-    def __init__(self, model_name: str = "qwen2.5-coder:3b", ollama_url: str = "http://localhost:11434/api/generate"):
+    def __init__(self, model_name: str = "qwen2.5-coder:1.5b", ollama_url: str = "http://localhost:11434/api/generate"):
         self.model_name = model_name
         self.ollama_url = ollama_url
 

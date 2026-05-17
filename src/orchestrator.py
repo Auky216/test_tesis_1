@@ -36,19 +36,25 @@ class Orchestrator:
         self.state.task_description = task
         
         # --- Capa 3: Planificación ---
-        self.state.subtasks = self.planner.decompose_task(task)
+        self.state.subtasks = await self.planner.decompose_task(task)
         
         for subtask in self.state.subtasks:
             
             # --- Capa 2: Contexto RAG ---
             context = self.context_manager.retrieve_context(subtask.description)
+            error_feedback = ""
             
             while subtask.status != "validated" and subtask.attempts < 3:
                 subtask.attempts += 1
-                print(f"[*] Solicitando código a Qwen2.5-Coder (Intento {subtask.attempts}/3)...")
+                print(f"\n[*] Solicitando código a Qwen2.5-Coder (Intento {subtask.attempts}/3)...")
+                
+                # Inyectar error previo si existe (Self-Reflection)
+                prompt_context = context
+                if error_feedback:
+                    prompt_context += f"\n\n# IMPORTANTE - CORRIGE ESTE ERROR DEL INTENTO ANTERIOR:\n{error_feedback}"
                 
                 # --- Capa 4: Generación ---
-                code = await self.generator.generate_code(subtask.description, context)
+                code = await self.generator.generate_code(subtask.description, prompt_context)
                 subtask.code = code
                 
                 # --- Capa 5: Validación ---
@@ -56,13 +62,15 @@ class Orchestrator:
                 
                 if is_valid:
                     subtask.status = "validated"
-                    print(f"[VALIDADOR] Éxito. Sintaxis correcta (Score: {metrics.get('score')}/100)")
+                    error_feedback = ""
+                    print(f"[VALIDADOR] Éxito. Código ejecutable (Score: {metrics.get('score')}/100)")
                     print(f"\n[DEBUG] --- CÓDIGO ACEPTADO ---\n{code}\n" + "-"*30)
                 else:
                     error_type = metrics.get('error_type')
                     details = metrics.get('details', 'Sin detalles')
+                    error_feedback = details
                     print(f"[VALIDADOR] Fallo ({error_type}). Rollback activado.")
-                    print(f"[MOTIVO DEL RECHAZO (RUFF)]:\n{details}")
+                    print(f"[MOTIVO DEL RECHAZO]:\n{details}")
                     print(f"\n[DEBUG] --- CÓDIGO FALLIDO ---\n{code}\n" + "-"*30)
                     
         final_code = ""

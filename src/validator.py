@@ -25,11 +25,28 @@ class Validator:
             if os.path.exists(self.temp_file):
                 os.remove(self.temp_file)
             
-    def validate_tests(self, code: str) -> bool:
-        """Pipeline 3: Usa pytest para validación funcional."""
-        # Lógica real implicaría inyectar el código y correr `pytest`
-        return True
-
+    def validate_execution(self, code: str) -> Tuple[bool, str]:
+        """Pipeline 3: Ejecuta el código en runtime para cazar errores lógicos (Timeouts o Tracebacks)."""
+        with open(self.temp_file, "w") as f:
+            f.write(code)
+            
+        try:
+            result = subprocess.run(
+                ["python3", self.temp_file], 
+                capture_output=True, 
+                text=True,
+                timeout=5
+            )
+            if result.returncode == 0:
+                return True, ""
+            return False, result.stderr
+        except subprocess.TimeoutExpired:
+            return False, "Timeout: Ejecución duró más de 5 segundos (posible bucle infinito o algoritmo ineficiente)."
+        except Exception as e:
+            return False, str(e)
+        finally:
+            if os.path.exists(self.temp_file):
+                os.remove(self.temp_file)
     def validate_all(self, code: str) -> Tuple[bool, dict]:
         """
         Capa 5: Valida el código y devuelve un score compuesto 
@@ -39,7 +56,9 @@ class Validator:
         if not is_syn_valid:
             return False, {"error_type": "syntax", "score": 20, "details": syn_details}
             
-        if not self.validate_tests(code):
-            return False, {"error_type": "functional", "score": 60, "details": ""}
+        is_exec_valid, exec_details = self.validate_execution(code)
+        if not is_exec_valid:
+            # En Raspberry Pi los errores lógicos son mortales, score más bajo.
+            return False, {"error_type": "execution_traceback", "score": 30, "details": exec_details[-500:]}
             
         return True, {"error_type": None, "score": 100, "details": ""}
